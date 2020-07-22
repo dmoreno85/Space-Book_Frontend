@@ -1,6 +1,8 @@
 import React from 'react';
 import {BrowserRouter, Switch,Route } from 'react-router-dom';
 import Header from './Components/Header/Header.jsx'
+import Home from './Containers/Home/Home.jsx';
+import Profile from './Containers/Profile/Profile.jsx';
 
 
 function App() {
@@ -9,9 +11,9 @@ function App() {
     <BrowserRouter>
      <Header/>
      <Switch>
-       <Route path="/home" exact/>
+       <Route path="/home" component={Home} exact/>
        <Route path="/addPost" exact/>
-       <Route path="/profile"/>
+       <Route path="/profile" component={Profile} exact/>
      </Switch>
     </BrowserRouter>
     </div> 
