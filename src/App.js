@@ -1,15 +1,20 @@
 import React from 'react';
-import {BrowserRouter as Router, } from 'react-router-dom';
-import {} from './Components/Header/Header.jsx'
+import {BrowserRouter, Switch,Route } from 'react-router-dom';
+import Header from './Components/Header/Header.jsx'
 
 
 function App() {
-  return (
-    <Router>
+       return (
     <div className="App">
+    <BrowserRouter>
      <Header/>
-    </div>
-    </Router>
+     <Switch>
+       <Route path="/home" exact/>
+       <Route path="/addPost" exact/>
+       <Route path="/profile"/>
+     </Switch>
+    </BrowserRouter>
+    </div> 
   );
 }
 

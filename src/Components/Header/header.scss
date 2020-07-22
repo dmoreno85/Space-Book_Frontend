@@ -1,0 +1,15 @@
+@import '../../colors.scss';
+
+.header {
+   
+    background-color: $Primary;
+  
+    padding: 0.5em;
+    display: flex;
+    justify-content: space-around;
+    a{
+        all:unset;
+        color:white;
+        cursor: pointer;
+    }
+}
