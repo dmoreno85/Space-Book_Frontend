@@ -1,0 +1,61 @@
+@import '../../colors.scss';
+
+.registerForm {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 1em;
+    margin: 13em;
+    background-color: white;
+    border-radius: 0.3em;
+    max-height: 26em;
+    width: 22em;
+
+    input {
+        
+        all: unset;
+        padding: 0.8em;
+        border-radius: 0.3em;
+        background-color: rgb(228, 224, 224);
+        color: black;
+        margin-bottom: 1.4em;
+    }
+
+    button {
+        all: unset;
+        cursor: pointer;
+        padding: 0.5em;
+        border-radius: 0.3em;
+        background: $Teriary;
+        height: 3em;
+       
+    }
+    button:hover{
+        background: $Secondary;
+    }
+    h4 a{
+        all: unset;
+        cursor: pointer;
+    }
+    .errorName{
+        position: absolute;
+        color: red;
+        bottom: 534px;
+    }
+    .errorEmail{
+        position: absolute;
+        color: red;
+        bottom: 466px;
+    }
+    .errorPassword{
+        position: absolute;
+        color: red;
+        bottom: 396px;
+    }
+    .errorPasswordConfirm{
+        position: absolute;
+        color: red;
+        bottom: 328px;
+    }
+}
