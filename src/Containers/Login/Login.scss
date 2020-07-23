@@ -1,6 +1,6 @@
 @import '../../colors.scss';
 
-.registerForm {
+.loginForm {
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -38,25 +38,21 @@
         all: unset;
         cursor: pointer;
     }
-    .errorName{
-        position: absolute;
-        color: red;
-        bottom: 534px;
-    }
+   
     .errorEmail{
         position: absolute;
         color: red;
-        bottom: 487px;
+        bottom: 512px;
     }
     .errorPassword{
         position: absolute;
         color: red;
-        bottom: 404px;
+        bottom: 443px;
     }
   
     .errorFormValidate{
         position: absolute;
         color: red;
-        bottom: 307px;
+        bottom: 354px;
     }
 }

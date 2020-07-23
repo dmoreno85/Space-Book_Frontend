@@ -54,7 +54,7 @@ class Login extends React.Component {
     };
     render() {
         return (
-            <form className="registerForm" onSubmit={this.handleSubmit}>
+            <form className="loginForm" onSubmit={this.handleSubmit}>
                 <h1>Inicia sesión</h1>
              
                 <input type="email"  name="email" value={this.state.email} onChange={this.handleChange} placeholder="Introduce un Email válido" ref={this.emailInput} />
