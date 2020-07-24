@@ -14,6 +14,13 @@ class App extends React.Component {
     };
 
   };
+
+  componentDidMount() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.setState({ isLoggedIn: true })
+    }
+  }
   render() {
     const isLoggedIn = this.state.isLoggedIn;
     if (isLoggedIn == false) {
@@ -21,31 +28,31 @@ class App extends React.Component {
         <div className="container">
           <BrowserRouter >
             <Switch>
-            <Route path="/" component={Login} exact />
+              <Route path="/" component={Login} exact />
               <Route path="/login" component={Login} exact />
               <Route path="/register" component={Register} exact />
             </Switch>
           </BrowserRouter>
         </div>
       )
-    }else{
- return (
-      <div className="container">
-        <BrowserRouter >
+    } else {
+      return (
+        <div className="container">
+          <BrowserRouter >
             <Header />
-          <Switch>
+            <Switch>
 
-            <Route path="/" component={Home} exact />
-            <Route path="/home" component={Home} exact />
-            <Route path="/addPost" exact />
-            <Route path="/profile" component={Profile} exact />
-          </Switch>
+              <Route path="/" component={Home} exact />
+              <Route path="/home" component={Home} exact />
+              <Route path="/addPost" exact />
+              <Route path="/profile" component={Profile} exact />
+            </Switch>
 
-        </BrowserRouter>
-      </div>
-     )
+          </BrowserRouter>
+        </div>
+      )
     }
-    
+
   }
 
 }

@@ -1,7 +1,8 @@
+import axios from 'axios';
 import React from 'react';
-import './Register.scss';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { isEmail } from 'validator';
+import './Register.scss';
 class Register extends React.Component {
     constructor(props) {
         super(props);
@@ -17,20 +18,40 @@ class Register extends React.Component {
             nameValidate:false,
             emailValidate:false,
             passwordValidate:false,
+            passwordConfirmValidate:false,
             formValidate: false
         };
         this.emailInput = React.createRef();
     };
     handleSubmit = async (event) => {
-
+const {name, email, password}= this.state;
         try {
             event.preventDefault();
             await this.validateForm();
-            if(this.state.nameValidate ===true & this.state.passwordValidate ===true & this.state.emailValidate ===true) this.setState({formValidate:true})
+            if(this.state.nameValidate ===true & this.state.passwordValidate ===true & this.state.emailValidate ===true & this.state.passwordConfirmValidate ===true) this.setState({formValidate:true})
             console.log('estado despues de validar ', this.state);
+            axios.post('http://localhost:3001/users/register', { name, email, password })
+            .then(res=>{
+                console.log(res.data.token)
+                localStorage.setItem('token',res.data.token);
+                console.log('historial',this.props);
+                // localStorage.setItem('user',JSON.stringify(res.data.user)) //esto sería para el login
+                const tokenSesion = localStorage.getItem('token');
+            //    if(tokenSesion){
+            //        this.componentDidMount();
+            //    }
+            })
+            .catch(console.log)
         } catch (error) {
         }
     };
+    // componentDidMount(){
+    //     const tokenSesion = localStorage.getItem('token');
+    //     console.log(tokenSesion);
+    //     if(tokenSesion){
+    //         this.props.history.Redirect('./home');
+    //     }
+    // }
     validateForm = () => {
         return new Promise((resolve, reject) => {
             this.validateEmail();
@@ -63,6 +84,7 @@ class Register extends React.Component {
         const password = this.state.password;
         const passwordConfirm = this.state.passwordConfirm;
         if (password !== passwordConfirm) this.setState({ errorPasswordConfirm: "Las contraseñas no coinciden." })
+        else this.setState({passwordConfirmValidate:true})
     }
 
     handleChange = (event) => {
