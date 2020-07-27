@@ -6,7 +6,7 @@
     flex-direction: column;
     justify-content: space-around;
     padding: 1em;
-    margin: 13em;
+    margin: 11em;
     background-color: white;
     border-radius: 0.3em;
     max-height: 26em;
@@ -41,21 +41,21 @@
     .errorName{
         position: absolute;
         color: red;
-        bottom: 534px;
+        bottom: 616px;
     }
     .errorEmail{
         position: absolute;
         color: red;
-        bottom: 467px;
+        bottom: 547px;
     }
     .errorPassword{
         position: absolute;
         color: red;
-        bottom: 397px;
+        bottom: 478px;
     }
     .errorPasswordConfirm{
         position: absolute;
         color: red;
-        bottom: 328px;
+        bottom: 409px;
     }
 }

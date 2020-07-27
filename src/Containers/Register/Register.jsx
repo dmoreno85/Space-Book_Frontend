@@ -3,6 +3,8 @@ import React from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 import { isEmail } from 'validator';
 import './Register.scss';
+import {register} from '../redux/actions/users'
+
 class Register extends React.Component {
     constructor(props) {
         super(props);
@@ -19,39 +21,60 @@ class Register extends React.Component {
             emailValidate:false,
             passwordValidate:false,
             passwordConfirmValidate:false,
-            formValidate: false
+            formValidate: false,
+        
         };
         this.emailInput = React.createRef();
     };
     handleSubmit = async (event) => {
-const {name, email, password}= this.state;
-        try {
-            event.preventDefault();
-            await this.validateForm();
-            if(this.state.nameValidate ===true & this.state.passwordValidate ===true & this.state.emailValidate ===true & this.state.passwordConfirmValidate ===true) this.setState({formValidate:true})
-            console.log('estado despues de validar ', this.state);
-            axios.post('http://localhost:3001/users/register', { name, email, password })
-            .then(res=>{
-                console.log(res.data.token)
-                localStorage.setItem('token',res.data.token);
-                console.log('historial',this.props);
-                // localStorage.setItem('user',JSON.stringify(res.data.user)) //esto sería para el login
-                const tokenSesion = localStorage.getItem('token');
-            //    if(tokenSesion){
-            //        this.componentDidMount();
-            //    }
-            })
-            .catch(console.log)
-        } catch (error) {
-        }
-    };
-    // componentDidMount(){
-    //     const tokenSesion = localStorage.getItem('token');
-    //     console.log(tokenSesion);
-    //     if(tokenSesion){
-    //         this.props.history.Redirect('./home');
-    //     }
-    // }
+     event.preventDefault();
+     await this.validateForm();
+     if(this.state.nameValidate ===true & this.state.passwordValidate ===true & this.state.emailValidate ===true & this.state.passwordConfirmValidate ===true) this.setState({formValidate:true})
+
+     const user = {
+         name:this.state.name,
+         email:this.state.email,
+         password:this.state.password
+     }
+     register(user)
+     .then(res => {
+        console.log(res.data);
+        setTimeout(() => {
+            // console.log('logueado y cambiando de ruta');
+            return this.props.history.push('/login')
+        }, 1500);
+    })
+    .catch(error => {
+       
+        console.log(error);
+    });
+            };
+
+
+//     handleSubmit = async (event) => {
+// const {name, email, password}= this.state;
+//         try {
+//             event.preventDefault();
+//             this.demoMethod();
+//             await this.validateForm();
+//             if(this.state.nameValidate ===true & this.state.passwordValidate ===true & this.state.emailValidate ===true & this.state.passwordConfirmValidate ===true) this.setState({formValidate:true})
+//             console.log('estado despues de validar ', this.state);
+//             axios.post('http://localhost:3001/users/register', { name, email, password })
+//             .then(res=>{
+//                 console.log(res.data.token)
+//                 localStorage.setItem('token',res.data.token);
+//                 // localStorage.setItem('user',JSON.stringify(res.data.user)) //esto sería para el login
+//                 const tokenSesion = localStorage.getItem('token');
+//                if(!tokenSesion){
+//                    console.log('dentroo');
+//                }
+//             })
+//             .catch(console.log)
+//         } catch (error) {
+//         }
+//     };
+
+    
     validateForm = () => {
         return new Promise((resolve, reject) => {
             this.validateEmail();
@@ -102,7 +125,7 @@ const {name, email, password}= this.state;
                 <div className="errorPassword"> {this.state.errorPassword} </div>
                 <input type="password"  name="passwordConfirm" value={this.passwordConfirm} onChange={this.handleChange} placeholder="Repita la contraseña." />
                 <div className="errorPasswordConfirm"> {this.state.errorPasswordConfirm} </div>
-                <button type="submit" disabled={this.state.validateForm}>Ok</button>
+                <button type="submit" onClick={this.demoMethod} disabled={this.state.validateForm}>Ok</button>
                 <h4>si ya tienes cuenta <NavLink to="/login">Logueate</NavLink></h4>
             </form>
         )
