@@ -2,9 +2,9 @@ import React from 'react';
 import './Login.scss';
 import { NavLink, withRouter } from 'react-router-dom';
 import { isEmail } from 'validator';
-import { useHistory } from 'react-router-dom';
 import { notification } from 'antd';
-import { login } from '../redux/actions/users'
+import { login } from '../redux/actions/users';
+
 class Login extends React.Component {
     constructor(props) {
         super(props);
@@ -36,21 +36,22 @@ class Login extends React.Component {
         login(userData)
 
             .then(res => {
-                // notification.success({message:'Login success', description: 'Successfully logged in'})
-                 console.log(res.data);
-                setTimeout(() => {
+                // notification.success({description: res.data.message, duration:0})
+                //  console.log(res.data);
+                if (res) {
+                    // setTimeout(() => {
                     // console.log('logueado y cambiando de ruta');
                     return this.props.history.push('/home')
-                }, 1500);
+                    // }, 500);
+                }
+
             })
             .catch(error => {
                 const errorMsg = error.response?.data?.message;
-                // notification.error({ message: 'Login failed', description: errorMsg });
+                // notification.error({ description: errorMsg,duration:0 });
+                console.log(error);
             });
-
-
     };
-
 
     validateForm = () => {
         return new Promise((resolve, reject) => {
@@ -60,12 +61,14 @@ class Login extends React.Component {
             reject('form no validado')
         })
     };
+
     validatePassword = () => {
         const password = this.state.password;
         if (password.length === 0) this.setState({ errorPassword: "La contraseña es requerida." })
         else if (password.length < 8) this.setState({ errorPassword: "La contraseña debe tener mínimo 8 carácteres." })
         else this.setState({ errorPassword: '', passwordValidate: true })
     };
+
     validateEmail = () => {
         const email = this.state.email;
         if (email.length === 0) this.setState({ errorEmail: "El email es requerido." })
@@ -76,11 +79,11 @@ class Login extends React.Component {
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value })
     };
+
     render() {
         return (
             <form className="loginForm" onSubmit={this.handleSubmit}>
                 <h1>Inicia sesión</h1>
-
                 <input type="email" name="email" value={this.state.email} onChange={this.handleChange} placeholder="Introduce un Email válido" ref={this.emailInput} />
                 <div className="errorEmail"> {this.state.errorEmail} </div>
                 <input type="password" name="password" value={this.password} onChange={this.handleChange} placeholder="Crea una contraseña." />

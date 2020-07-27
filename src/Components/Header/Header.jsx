@@ -1,25 +1,32 @@
 import React from 'react';
 import './header.scss'
 import { NavLink } from 'react-router-dom';
-const Header = props => {
-    return (
-        <header className="header">
+import { connect } from 'react-redux'
+const Header = ({ user }) => {
 
-            <NavLink to="/home">
-                {/* Nombre de usuario logueado  */}
-                <span className="name">Nombre</span>
-            </NavLink>
-            <NavLink to="/addPost">
-                {/* para Añadir un post nuevo  */}
-                <span className="addPost">Add Post +</span>
-            </NavLink>
-            <NavLink to="/profile">
-                {/* desplegable para perdil  */}
-                <span className="profile">Perfil</span>
-            </NavLink>
+    return (
+        < header className="header">
+            {user && <React.Fragment>
+                <NavLink to="/home">
+                    {/* Nombre de usuario logueado  */}
+                    <span className="name">{user.name} </span>
+                </NavLink>
+                <NavLink to="/addPost">
+                    {/* para Añadir un post nuevo  */}
+                    <span className="addPost">Add Post +</span>
+                </NavLink>
+                <NavLink to="/profile">
+                    {/* desplegable para perdil  */}
+                    <span className="profile">Perfil</span>
+                </NavLink>
+            </React.Fragment>}
+
 
         </header>
     )
 };
+const mapStateToProps = state => ({
+    user: state.users.user
 
-export default Header;
+});
+export default connect(mapStateToProps)(Header);

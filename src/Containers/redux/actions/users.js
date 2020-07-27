@@ -8,29 +8,23 @@ export const register = async(user)=>{
         store.dispatch({
             type:SIGN_UP
         });
-        console.log(store);
+   
         return res;
     } catch (error) {
         console.log('Error al registrar', error);
     }
 };
 
-export const login = async(userData) =>{
+export const login = async(user) =>{
     try {
-        // console.log('user sin loguear',user);
-        // console.log('datos enviados para login', userData);
-        const res = await axios.post('http://localhost:3001/users/login',userData);
+    
+        const res = await axios.post('http://localhost:3001/users/login',user);
         store.dispatch({
             type:LOGIN,
             payload: res.data.user,
-            //  payload:store.userAuth
         });
         localStorage.setItem('authToken',res.data.user.tokens[0].token);
-        store.subscribe(()=>{
-            console.log('cambio en store', store.getState());
-          })
-         
-        //  console.log('token',res.data.token);
+    
          return res;
     } catch (error) {
         
