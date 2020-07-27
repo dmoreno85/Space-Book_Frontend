@@ -18,6 +18,8 @@ class App extends React.Component {
 
 
   render() {
+  
+  const isRegistered = this.state.isRegistered;
     const isLoggedIn = this.state.isLoggedIn;
     const token = localStorage.getItem('authToken');
       return (
