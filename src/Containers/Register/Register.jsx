@@ -97,7 +97,7 @@ class Register extends React.Component {
                 <div className="errorPassword"> {this.state.errorPassword} </div>
                 <input type="password" name="passwordConfirm" value={this.passwordConfirm} onChange={this.handleChange} placeholder="Repita la contraseña." />
                 <div className="errorPasswordConfirm"> {this.state.errorPasswordConfirm} </div>
-                <button type="submit" onClick={this.demoMethod} disabled={this.state.validateForm}>Ok</button>
+                <button type="submit" disabled={this.state.validateForm}>Ok</button>
                 <h4>si ya tienes cuenta <NavLink to="/login">Logueate</NavLink></h4>
             </form>
         )

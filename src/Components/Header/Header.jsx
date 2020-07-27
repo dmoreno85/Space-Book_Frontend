@@ -1,7 +1,8 @@
 import React from 'react';
 import './header.scss'
 import { NavLink } from 'react-router-dom';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import Logout from '../logout/logout'
 const Header = ({ user }) => {
 
     return (
@@ -19,7 +20,9 @@ const Header = ({ user }) => {
                     {/* desplegable para perdil  */}
                     <span className="profile">Perfil</span>
                 </NavLink>
+                <Logout/>
             </React.Fragment>}
+               
 
 
         </header>

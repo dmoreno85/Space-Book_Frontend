@@ -9,7 +9,6 @@ import './App.scss'
 import Login from './Containers/Login/Login.jsx';
 
 const App = ({ user, isLoggedIn }) => {
-  const token = localStorage.getItem('authToken');
   if (isLoggedIn) {
     console.log('Logueado', isLoggedIn);
   } else console.log('no logueado', isLoggedIn);
@@ -19,11 +18,11 @@ const App = ({ user, isLoggedIn }) => {
       <BrowserRouter >
         {isLoggedIn && <Header />}
       <div className="container">
-        {token ? <Redirect to='/home' /> : <Redirect to='/login' />}
+        {isLoggedIn ? <Redirect to='/home' /> : <Redirect to='/login' />}
         <Switch>
           <Route path="/login" component={Login} exact />
           <Route path="/register" component={Register} exact />
-          {!token ? <Route path="/" component={Home} exact /> : <Route path="/" component={Login} exact />}
+          {isLoggedIn ? <Route path="/" component={Home} exact /> : <Route path="/" component={Login} exact />}
           <Route path="/home" component={Home} exact />
           <Route path="/addPost" exact />
           <Route path="/profile" component={Profile} exact />
