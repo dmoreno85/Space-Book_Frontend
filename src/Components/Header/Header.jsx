@@ -20,9 +20,9 @@ const Header = ({ user }) => {
                     {/* desplegable para perdil  */}
                     <span className="profile">Perfil</span>
                 </NavLink>
-                <Logout/>
+                <Logout />
             </React.Fragment>}
-               
+
 
 
         </header>

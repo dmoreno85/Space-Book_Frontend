@@ -22,14 +22,12 @@ export const register = async (user) => {
 
 export const login = async (user) => {
     try {
-
         const res = await axios.post('http://localhost:3001/users/login', user);
         store.dispatch({
             type: LOGIN,
             payload: res.data.user,
         });
         localStorage.setItem('authToken', res.data.user.tokens[0].token);
-
         return res;
     } catch (error) {
 
@@ -39,7 +37,7 @@ export const login = async (user) => {
 export const logout = async (user) => {
     try {
         store.dispatch({
-            type:LOGOUT
+            type: LOGOUT
         });
         localStorage.removeItem('authToken')
     } catch (error) {
