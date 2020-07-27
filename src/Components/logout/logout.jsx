@@ -1,7 +1,8 @@
 import React from 'react';
 import './logout.scss';
 import { connect } from 'react-redux';
-import { logout } from '../../Containers/redux/actions/users'
+import { logout } from '../../Containers/redux/actions/users';
+import { NavLink } from 'react-router-dom';
 const Logout = ({user}) => {
 
    const  HandleLogout=(event)=>{
@@ -20,7 +21,7 @@ const Logout = ({user}) => {
     }
 return(
     <div>
-<button onClick={HandleLogout}>Logout</button>
+<a onClick={HandleLogout}>Salir</a>
     </div>
 )
 };
