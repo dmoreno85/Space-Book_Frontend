@@ -1,11 +1,26 @@
-import React from 'react';
-const Home = props => {
+import React,{useEffect} from 'react';
+import {connect} from 'react-redux'
+import{getUsers} from '../redux/actions/users';
+const Home = ({user}) => {
+    useEffect(()=>{
+        getUsers()
+console.log(user);
+     
+    },[])
     return (
+      
         <div className="Home">
-
-            <span>Esto es Home</span>
-
+{
+user.map(users=><div> {users.name}</div>)
+}
         </div>
     )
 }
-export default Home;
+const mapStateToProps = ({users}) => ({
+
+    user:users.user.allUsers,
+  
+  
+  });
+
+export default connect(mapStateToProps)(Home);

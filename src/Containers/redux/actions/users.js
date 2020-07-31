@@ -4,7 +4,7 @@ import {
     SIGN_UP,
     LOGIN,
     LOGOUT,
-    SET_USER
+    GET_USERS
 } from '../types/users';
 
 export const register = async (user) => {
@@ -28,8 +28,8 @@ export const login = async (user) => {
             type: LOGIN,
             payload: res.data.user,
         });
-        localStorage.setItem('authToken', res.data.user.tokens[0].token);
-
+        localStorage.setItem('authToken', res.data.token);
+        // console.log(localStorage.getItem('authToken'));
         return res;
     } catch (error) {
 
@@ -44,5 +44,26 @@ export const logout = async (user) => {
         localStorage.removeItem('authToken')
     } catch (error) {
 
+    }
+};
+
+export const getUsers = async () => {
+    try {
+// console.log('antes de axios getusers');
+const token = localStorage.getItem('authToken');
+// console.log(token);
+        const res = await axios.post('http://localhost:3001/users/',{
+            headers:{
+                Authorization: token
+            }
+        });
+        // console.log('despues de axios');
+        store.dispatch({
+            type: GET_USERS,
+            payload: res.data,
+        });
+//  console.log(res);
+    } catch (error) {
+console.error(error);
     }
 };

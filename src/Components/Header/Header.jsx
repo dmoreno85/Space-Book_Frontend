@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Logout from '../logout/logout'
 const Header = ({ user }) => {
-
     return (
         < header className="header">
             {user && <React.Fragment>
@@ -28,8 +27,9 @@ const Header = ({ user }) => {
         </header>
     )
 };
-const mapStateToProps = state => ({
-    user: state.users.user
+const mapStateToProps = ({users}) => ({
+    user: users.user.user
+
 
 });
 export default connect(mapStateToProps)(Header);
