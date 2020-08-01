@@ -1,18 +1,19 @@
 import React,{useEffect} from 'react';
 import {connect} from 'react-redux'
 import{getUsers} from '../redux/actions/users';
+import AllPosts from '../Posts/Posts/allPosts'
 const Home = ({user}) => {
     useEffect(()=>{
         getUsers()
-console.log(user);
-     
+
     },[])
     return (
       
         <div className="Home">
-{
-user.map(users=><div> {users.name}</div>)
-}
+{/* {
+user?.map(users=><div key={users._id}>Nombre users:  {users.name}</div>)
+} */}
+<AllPosts/>
         </div>
     )
 }

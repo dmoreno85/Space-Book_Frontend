@@ -1,11 +1,12 @@
 import {LOGIN,LOGOUT,GET_USERS} from '../types/users'
 
+
 const initialState = {
     user: {},
     user_logged:false,
    
-}
-export default function usersReducer(state = initialState, action) {
+};
+const usersReducer=(state = initialState, action) =>{
     switch (action.type) {
         case LOGIN:
             return {
@@ -29,3 +30,4 @@ export default function usersReducer(state = initialState, action) {
             return state
     }
 }
+export default usersReducer;
