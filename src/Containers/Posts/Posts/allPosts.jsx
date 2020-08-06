@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getAllPosts } from '../../redux/actions/posts';
-import Post from '../Post/Post.jsx'
+import Post from '../Post/Post.jsx';
+import{ LikeDislike} from '../../../Components/LikeDislike/likeDislike';
+import './allPosts.scss';
 
 class AllPost extends React.Component {
 
@@ -16,7 +18,9 @@ class AllPost extends React.Component {
       
         return (
             <div className="posts">
-                {Posts?.map(post => <div key={post._id}>{post.user.name} : {post.message}</div>)}
+                {Posts?.map(post =>
+                     <div key={post._id} className="containerPost"> {post.user.name} : {post.message}  <LikeDislike/>
+                     </div>)}
             </div>
         )
     };

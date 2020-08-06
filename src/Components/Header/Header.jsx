@@ -2,7 +2,7 @@ import React from 'react';
 import './header.scss'
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Logout from '../logout/logout'
+import Logout from '../Logout/logout'
 const Header = ({ user }) => {
     return (
         < header className="header">

@@ -1,29 +1,33 @@
-import React,{useEffect} from 'react';
-import {connect} from 'react-redux'
-import{getUsers} from '../redux/actions/users';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux'
+import { getUsers } from '../redux/actions/users';
 import Post from '../Posts/Post/Post.jsx';
-import AllPosts from '../Posts/Posts/allPosts.jsx'
-const Home = ({user}) => {
-    useEffect(()=>{
+import AllPosts from '../Posts/Posts/allPosts.jsx';
+import './Home.scss'
+const Home = ({ user }) => {
+    useEffect(() => {
         getUsers()
 
-    },[])
+    }, [])
     return (
-      
-        <div className="Home">
-            <AllPosts/>
-{/* {
+
+        <div >
+            <div className="home">
+
+                <AllPosts className="post" />
+            </div>
+            {/* {
 user?.map(users=><div key={users._id}>Nombre users:  {users.name}</div>)
 } */}
-<Post className="post"/>
+            <Post />
         </div>
     )
 }
-const mapStateToProps = ({users}) => ({
+const mapStateToProps = ({ users }) => ({
 
-    user:users.user.allUsers,
-  
-  
-  });
+    user: users.user.allUsers,
+
+
+});
 
 export default connect(mapStateToProps)(Home);
