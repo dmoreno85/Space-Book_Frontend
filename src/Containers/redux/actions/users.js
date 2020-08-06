@@ -22,7 +22,6 @@ export const register = async (user) => {
 
 export const login = async (user) => {
     try {
-
         const res = await axios.post('http://localhost:3001/users/login', user);
         store.dispatch({
             type: LOGIN,
