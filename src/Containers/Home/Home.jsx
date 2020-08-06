@@ -1,7 +1,8 @@
 import React,{useEffect} from 'react';
 import {connect} from 'react-redux'
 import{getUsers} from '../redux/actions/users';
-import AllPosts from '../Posts/Posts/allPosts'
+import Post from '../Posts/Post/Post.jsx';
+import AllPosts from '../Posts/Posts/allPosts.jsx'
 const Home = ({user}) => {
     useEffect(()=>{
         getUsers()
@@ -10,10 +11,11 @@ const Home = ({user}) => {
     return (
       
         <div className="Home">
+            <AllPosts/>
 {/* {
 user?.map(users=><div key={users._id}>Nombre users:  {users.name}</div>)
 } */}
-<AllPosts/>
+<Post className="post"/>
         </div>
     )
 }

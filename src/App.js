@@ -9,9 +9,9 @@ import './App.scss'
 import Login from './Containers/Login/Login.jsx';
 
 const App = ({ isLoggedIn }) => {
-  if (isLoggedIn) {
-    console.log('Logueado', isLoggedIn);
-  } else console.log('no logueado', isLoggedIn);
+  // if (isLoggedIn) {
+  //   console.log('Logueado', isLoggedIn);
+  // } else console.log('no logueado', isLoggedIn);
 
   return (
     <div >
