@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import {LOGIN,LOGOUT,GET_USERS} from '../types/users'
 
 
@@ -8,15 +7,6 @@ const initialState = {
    
 };
 const usersReducer=(state = initialState, action) =>{
-=======
-import { LOGIN, LOGOUT, SET_USER } from '../types/users'
-
-const initialState = {
-    user: {},
-    user_logged: false
-}
-export default function usersReducer(state = initialState, action) {
->>>>>>> bug-mensaje-error-login
     switch (action.type) {
         case LOGIN:
             return {
