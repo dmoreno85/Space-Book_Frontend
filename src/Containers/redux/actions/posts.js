@@ -6,10 +6,11 @@ import {
     UPDATE_POST,
     REMOVE_POST
 } from '../types/posts';
+import { message } from 'antd';
 
 export const getAllPosts = async () => {
+    const token = localStorage.getItem('authToken');
     try {
-        const token = localStorage.getItem('authToken');
         const res = await axios.get('http://localhost:3001/posts/', {
             headers: {
                 Authorization: token
@@ -35,4 +36,27 @@ export const addNewPost = async (post) => {
 
     console.log('axios create post');
     return getAllPosts();
+}
+
+export const removePost = async (post_id) => {
+    const token = localStorage.getItem('authToken');
+        await axios.delete('http://localhost:3001/posts/'+ post_id, {
+            headers: {
+                Authorization: token,
+            }
+        });
+        return getAllPosts();
+   
+}
+
+export const updatePost = async (post_id, post) => {
+    const token = localStorage.getItem('authToken');
+console.log(token);
+        await axios.put(`http://localhost:3001/posts/`+ post_id, post, {
+            headers: {
+                Authorization: token,
+            }
+        });
+        return getAllPosts();
+   
 }
