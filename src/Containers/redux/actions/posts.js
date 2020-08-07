@@ -6,6 +6,7 @@ import {
     UPDATE_POST,
     REMOVE_POST
 } from '../types/posts';
+import { message } from 'antd';
 
 export const getAllPosts = async () => {
     const token = localStorage.getItem('authToken');
@@ -40,6 +41,18 @@ export const addNewPost = async (post) => {
 export const removePost = async (post_id) => {
     const token = localStorage.getItem('authToken');
         await axios.delete('http://localhost:3001/posts/'+ post_id, {
+            headers: {
+                Authorization: token,
+            }
+        });
+        return getAllPosts();
+   
+}
+
+export const updatePost = async (post_id, post) => {
+    const token = localStorage.getItem('authToken');
+console.log(token);
+        await axios.put(`http://localhost:3001/posts/`+ post_id, post, {
             headers: {
                 Authorization: token,
             }

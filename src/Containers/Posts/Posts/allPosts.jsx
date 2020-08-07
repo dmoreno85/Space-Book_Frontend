@@ -1,24 +1,56 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getAllPosts, removePost } from '../../redux/actions/posts';
+import { getAllPosts, removePost, updatePost } from '../../redux/actions/posts';
 import Post from '../Post/Post.jsx'
-import axios from 'axios'
-class AllPost extends React.Component {
 
+class AllPost extends React.Component {
+    state = {
+        textUpdate: false,
+    }
     componentDidMount = () => {
         getAllPosts()
 
     };
+
     clearPost(id) {
         removePost(id);
+    };
+
+    handleTextUpdate = () => {
+        this.setState({ textUpdate: true })
+
+    };
+
+    async handleSubmit(event, id) {
+        event.preventDefault();
+        event.persist();
+        let message = event.target.message.value
+        if (message.length !== 0) {
+
+            await updatePost(id, { message })
+                .then(() => event.target?.reset())
+                .then(this.setState({ textUpdate: false }))
+        } else {
+            this.setState({ textUpdate: false })
+        }
     }
     render() {
-        // console.log('esto es posts', this.props.posts);
+
         const Posts = this.props.posts;
 
         return (
             <div className="posts">
-                {Posts?.map(post => <div key={post._id}>{post.user.name} : {post.message} <button onClick={() => this.clearPost(post._id)}>CLEAR</button></div>)}
+                {Posts?.map(post => <div key={post._id}>{post.user.name} : {post.message}
+                    <button onClick={() => this.clearPost(post._id)}>CLEAR</button>
+                    {this.state.textUpdate && <div className="update" >
+                        <form onSubmit={(event) => this.handleSubmit(event, post._id)}>
+                            <textarea name="message"></textarea>
+                            <button className="primary" >Update Post</button>
+                        </form>
+                    </div>}
+                    <button onClick={this.handleTextUpdate}>Update</button>
+
+                </div>)}
 
             </div>
         )
