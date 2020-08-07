@@ -8,8 +8,8 @@ import {
 } from '../types/posts';
 
 export const getAllPosts = async () => {
+    const token = localStorage.getItem('authToken');
     try {
-        const token = localStorage.getItem('authToken');
         const res = await axios.get('http://localhost:3001/posts/', {
             headers: {
                 Authorization: token
@@ -35,4 +35,15 @@ export const addNewPost = async (post) => {
 
     console.log('axios create post');
     return getAllPosts();
+}
+
+export const removePost = async (post_id) => {
+    const token = localStorage.getItem('authToken');
+        await axios.delete('http://localhost:3001/posts/'+ post_id, {
+            headers: {
+                Authorization: token,
+            }
+        });
+        return getAllPosts();
+   
 }
